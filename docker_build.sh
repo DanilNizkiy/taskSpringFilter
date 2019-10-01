@@ -5,4 +5,4 @@ cp ./src/main/resources/application.properties ./docker_context/config/applicati
 docker build -f docker_context/Dockerfile -t danilnizkiy/test-app:v1.3 .
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 REV=`date +"%m-%d-%H-%M"`
-docker push danilnizkiy/test-app:$REV
+docker push danilnizkiy/test-app:"$REV"
