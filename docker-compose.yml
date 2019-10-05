@@ -3,9 +3,9 @@ services:
   postgres:
     image: "postgres"
     ports:
-      - "5432:5432"
+    - "5432:5432"
     volumes:
-       - ${PWD}"/data:/var/lib/postgresql/data
+    - ${PWD}/test_data:/tmp
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: mysecretpassword
@@ -13,4 +13,4 @@ services:
     image: "danilnizkiy/test-app:latest"
     network_mode: host
     depends_on:
-      - "postgres"
+    - "postgres"
