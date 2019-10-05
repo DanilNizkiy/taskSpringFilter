@@ -10,7 +10,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: mysecretpassword
   app:
-    image: "danilnizkiy/test-app:v1.2"
+    image: "danilnizkiy/test-app:latest"
     network_mode: host
     depends_on:
       - "postgres"

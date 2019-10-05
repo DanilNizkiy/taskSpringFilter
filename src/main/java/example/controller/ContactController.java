@@ -10,8 +10,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,7 +46,6 @@ public class ContactController {
         model.addAttribute("contacts", contactsList);
        return new ResponseEntity<Model>(model, HttpStatus.OK);
     }
-
 
     private List<Contact> filterContacts(String nameFilter, int responseSize) {
 
@@ -69,4 +75,30 @@ public class ContactController {
         return contactsList;
 
     }
+
+    //загрузить базу с txt документа
+//    @RequestMapping(value = "/addDbContacts", method = RequestMethod.GET)
+//    public String addContactsTxt() throws IOException {
+//
+//        FileInputStream fileInputStream = new FileInputStream("/home/user/aaa.txt");
+//        StringBuilder stringBuilder = new StringBuilder();
+//        byte[] buffer2 = new byte[1024];
+//        while (fileInputStream.read(buffer2) != -1){
+//            String h = new String(buffer2, StandardCharsets.UTF_8);
+//            stringBuilder.append(h);
+//        }
+//        Pattern pattern =
+//                Pattern.compile("\\w+", Pattern.UNICODE_CHARACTER_CLASS
+//                        | Pattern.CASE_INSENSITIVE);
+//        Matcher matcher = pattern.matcher(stringBuilder.toString());
+//        SortedSet<String> cont = new TreeSet<>();
+//
+//        while (matcher.find())
+//            cont.add(matcher.group());
+//
+//        for (String word : cont)
+//            contactService.seve(new Contact(word));
+//
+//        return "successfully";
+//    }
 }
