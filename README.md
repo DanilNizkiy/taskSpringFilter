@@ -1,7 +1,7 @@
 travis-ci:
 [![Build Status](https://travis-ci.com/DanilNizkiy/taskSpringFilter.png)](https://travis-ci.com/DanilNizkiy/taskSpringFilter)
 
-Для использования выполнить следующее:
+Для использования выполнить следующее:\n
 1)git clone https://github.com/DanilNizkiy/taskSpringFilter.git
 2)В корне проекта выполнить команду: docker-compose up -d
 3)Выполнить запрос для загрузки базы данных: curl http://localhost:8080/hello/addDbContacts
