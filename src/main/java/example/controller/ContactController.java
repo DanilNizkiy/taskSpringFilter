@@ -80,7 +80,7 @@ public class ContactController {
     @RequestMapping(value = "/addDbContacts", method = RequestMethod.GET)
     public String addContactsTxt() throws IOException {
 
-        FileInputStream fileInputStream = new FileInputStream("database_loading.txt");
+        FileInputStream fileInputStream = new FileInputStream("/opt/database_loading.txt");
         StringBuilder stringBuilder = new StringBuilder();
         byte[] buffer2 = new byte[1024];
         while (fileInputStream.read(buffer2) != -1){
