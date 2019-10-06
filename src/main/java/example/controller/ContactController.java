@@ -76,29 +76,29 @@ public class ContactController {
 
     }
 
-    //загрузить базу с txt документа
-//    @RequestMapping(value = "/addDbContacts", method = RequestMethod.GET)
-//    public String addContactsTxt() throws IOException {
-//
-//        FileInputStream fileInputStream = new FileInputStream("/home/user/aaa.txt");
-//        StringBuilder stringBuilder = new StringBuilder();
-//        byte[] buffer2 = new byte[1024];
-//        while (fileInputStream.read(buffer2) != -1){
-//            String h = new String(buffer2, StandardCharsets.UTF_8);
-//            stringBuilder.append(h);
-//        }
-//        Pattern pattern =
-//                Pattern.compile("\\w+", Pattern.UNICODE_CHARACTER_CLASS
-//                        | Pattern.CASE_INSENSITIVE);
-//        Matcher matcher = pattern.matcher(stringBuilder.toString());
-//        SortedSet<String> cont = new TreeSet<>();
-//
-//        while (matcher.find())
-//            cont.add(matcher.group());
-//
-//        for (String word : cont)
-//            contactService.seve(new Contact(word));
-//
-//        return "successfully";
-//    }
+   // загрузить базу с txt документа
+    @RequestMapping(value = "/addDbContacts", method = RequestMethod.GET)
+    public String addContactsTxt() throws IOException {
+
+        FileInputStream fileInputStream = new FileInputStream("database_loading.txt");
+        StringBuilder stringBuilder = new StringBuilder();
+        byte[] buffer2 = new byte[1024];
+        while (fileInputStream.read(buffer2) != -1){
+            String h = new String(buffer2, StandardCharsets.UTF_8);
+            stringBuilder.append(h);
+        }
+        Pattern pattern =
+                Pattern.compile("\\w+", Pattern.UNICODE_CHARACTER_CLASS
+                        | Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(stringBuilder.toString());
+        SortedSet<String> cont = new TreeSet<>();
+
+        while (matcher.find())
+            cont.add(matcher.group());
+
+        for (String word : cont)
+            contactService.seve(new Contact(word));
+
+        return "successfully";
+    }
 }
