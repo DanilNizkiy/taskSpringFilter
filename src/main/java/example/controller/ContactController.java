@@ -32,20 +32,38 @@ public class ContactController {
     private int pageSizeForDatabase = 30;
 
     @RequestMapping(value = "/contacts", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<Model>  getAllCards(@RequestParam(value = "nameFilter") String nameFilter,
+    public ResponseEntity<Model> getFilteredData(@RequestParam(value = "nameFilter") String nameFilter,
                                @RequestParam(value = "responseSize")Integer responseSize,
                                final Model model) {
 
         List<Contact> contactsList = filterContacts(nameFilter,responseSize);
+       return checkAnswer(contactsList,model);
+    }
 
+    @RequestMapping(value = "/getAll", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<Model>  getAll(@RequestParam(value = "page")Integer page,
+                                               @RequestParam(value = "pageSize")Integer pageSize,
+                                               final Model model) {
+        List<Contact> contactsList = contactService.getContacts(page,pageSize);
+        return checkAnswer(contactsList,model);
+    }
+
+    @RequestMapping(value = "/getDatabaseLength", method = RequestMethod.GET, produces = "application/json")
+    public String  getDatabaseLength() {
+        return "The number of rows in the database = " + contactService.getDatabaseLength() + "\n";
+    }
+
+
+    private ResponseEntity<Model> checkAnswer(List<Contact> contactsList, Model model){
         if (contactsList == null || contactsList.size() == 0) {
             Error error = new Error(HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.getReasonPhrase());
             model.addAttribute(error);
             return new ResponseEntity<Model>(model, HttpStatus.NOT_FOUND);
         }
         model.addAttribute("contacts", contactsList);
-       return new ResponseEntity<Model>(model, HttpStatus.OK);
+        return new ResponseEntity<Model>(model, HttpStatus.OK);
     }
+
 
     private List<Contact> filterContacts(String nameFilter, int responseSize) {
 
@@ -99,6 +117,6 @@ public class ContactController {
         for (String word : cont)
             contactService.seve(new Contact(word));
 
-        return "successfully";
+        return "successfully \n";
     }
 }
